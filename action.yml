@@ -1,0 +1,15 @@
+name: 'Include Guards Check'
+description: 'Check for #include guards in C/C++ header files'
+inputs:
+  path:
+    description: 'The path to look for include files (e.g., include/)'
+    required: false
+    default: '.'
+outputs:
+  fails:
+    description: 'A space-separated list of files for which the check failed'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.path }}

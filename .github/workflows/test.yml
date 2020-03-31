@@ -1,0 +1,17 @@
+on: [push, pull_request]
+
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+    name: A test job
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Include guards check
+        uses: ./
+        id: guards
+        continue-on-error: true
+        with:
+          path: 'test'
+      - name: Get the bad files
+        run: echo "Bad files are ${{ steps.guards.outputs.fails }}"
