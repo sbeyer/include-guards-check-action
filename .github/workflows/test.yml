@@ -1,17 +1,63 @@
 on: [push, pull_request]
 
 jobs:
-  test_job:
+  test_suite:
     runs-on: ubuntu-latest
-    name: A test job
+    name: Test suite
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Include guards check
+      - name: "Good {path}"
         uses: ./
-        id: guards
+        id: good-path
+        with:
+          path: 'test/path.good'
+      - name: Check no bad files
+        run: test -z "${{ steps.good-path.outputs.fails }}"
+      - name: "Bad {path}"
+        uses: ./
+        id: bad-path
         continue-on-error: true
         with:
-          path: 'test'
-      - name: Get the bad files
-        run: echo "Bad files are ${{ steps.guards.outputs.fails }}"
+          path: 'test/bad'
+      - name: Check bad files
+        run: test "${{ steps.bad-path.outputs.fails }}" = "dir1/dir2/dir3/foo.hpp "
+      - name: "Good {file}"
+        uses: ./
+        with:
+          path: 'test/file.good'
+          pattern: "PROJECT_{file}"
+      - name: "Bad {file}"
+        uses: ./
+        id: bad-file
+        continue-on-error: true
+        with:
+          path: 'test/bad'
+          pattern: "{file}"
+      - name: Check bad files
+        run: test "${{ steps.bad-path.outputs.fails }}" = "dir1/dir2/dir3/foo.hpp "
+      - name: "Good {file_base}"
+        uses: ./
+        with:
+          path: 'test/file_base.good'
+          pattern: "PROJECT_{file_base}_HEADER"
+      - name: "Good {file_ext}"
+        uses: ./
+        with:
+          path: 'test/file.good'
+          pattern: "PROJECT_{file_base}_{file_ext}"
+      - name: "Good {dirs}"
+        uses: ./
+        with:
+          path: 'test/path.good'
+          pattern: "{dirs}_{file}"
+      - name: "Good {first_dir}"
+        uses: ./
+        with:
+          path: 'test/first_dir.good'
+          pattern: "{first_dir}_{file}"
+      - name: "Good {last_dir}"
+        uses: ./
+        with:
+          path: 'test/last_dir.good'
+          pattern: "PROJECT_{last_dir}_{file}"
