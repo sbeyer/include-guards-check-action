@@ -55,6 +55,26 @@ Default is `{path}`, which is useful if your path structure is
 like `<project name>/<header file>` or
 `<project name>/<some category>/<header file>`.
 
+### `only`
+
+The regular expression for paths to check.
+Paths not matching this regular expression are ignored.
+
+Three artificial examples:
+ * `dir/\(foo\|bar\)\.h` checks `dir/foo.h` and `dir/bar.h` only,
+ * `^v[0-9\.]\+/` checks paths beginning with a versional directory only,
+ * `/.*/' checks paths with at least two directories only.
+
+By default, all paths are checked.
+
+### `ignore`
+
+The regular expression for paths to ignore.
+This is possibly a simpler way (than using `only`) to exclude
+files from checking.
+
+By default, no paths are ignored.
+
 ## Outputs
 
 ### `fails`

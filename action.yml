@@ -9,6 +9,14 @@ inputs:
     description: 'The pattern for the guard macro'
     required: false
     default: '{path}'
+  only:
+    description: 'The regex of files to check only'
+    required: false
+    default: ''
+  ignore:
+    description: 'The regex of files to ignore'
+    required: false
+    default: ''
 outputs:
   fails:
     description: 'A space-separated list of files for which the check failed'
