@@ -2,9 +2,13 @@ name: 'Include Guards Check'
 description: 'Check for #include guards in C/C++ header files'
 inputs:
   path:
-    description: 'The path to look for include files (e.g., include/)'
+    description: 'The path to look for include files'
     required: false
     default: '.'
+  pattern:
+    description: 'The pattern for the guard macro'
+    required: false
+    default: '{path}'
 outputs:
   fails:
     description: 'A space-separated list of files for which the check failed'
