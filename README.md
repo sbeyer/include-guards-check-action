@@ -13,6 +13,11 @@ In these files we check for the pattern
 where `SOME_NAME` is based on the file name according to a pattern
 that can be specified by the user.
 
+Note that we do not really parse the preprocessor code, we just perform
+simple shell scripting.
+That means, you can easily trick the check script into false positives.
+However, why should you do that?
+
 ## Inputs
 
 ### `path`
