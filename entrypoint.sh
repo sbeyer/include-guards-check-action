@@ -11,7 +11,7 @@ macrofy () {
 }
 
 guardify () {
-	path="$2"
+	path="$1"
 	file="$(basename "$path")"
 	file_ext="$(echo "$file" | sed -e 's|^.*\.||')"
 	file_base="$(echo "$file" | sed -e 's/^\(.*\)\.\([^\.]*\)$/\1/')"
@@ -72,7 +72,7 @@ fail () {
 
 for header in $(find . -regex '.\+\.\(h\|H\|hh\|hpp\|hxx\)' | grep -v '^.git/' | sed -e 's/^\.\///')
 do
-	guard="$(guardify "$INPUT_PATTERN" "$header")"
+	guard="$(guardify "$header")"
 
 	echo "Checking $header for $guard"
 	awk '
