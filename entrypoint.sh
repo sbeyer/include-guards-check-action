@@ -71,9 +71,9 @@ fail () {
 }
 
 for header in $(find . -regex '.\+\.\(h\|H\|hh\|hpp\|hxx\)' |
+			sed -e 's/^\.\///' |
 			grep -e "$INPUT_ONLY" |
-			grep -v -e '^.git/' ${INPUT_IGNORE:+-e} ${INPUT_IGNORE:+"$INPUT_IGNORE"} |
-			sed -e 's/^\.\///')
+			grep -v -e '^.git/' ${INPUT_IGNORE:+-e} ${INPUT_IGNORE:+"$INPUT_IGNORE"})
 do
 	guard="$(guardify "$header")"
 
