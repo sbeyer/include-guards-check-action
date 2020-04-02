@@ -5,7 +5,7 @@ This is a [GitHub Action](//help.github.com/en/actions) to check for
 
 We consider files with extensions `.h`, `.H`, `.hh`, `.hpp`, and `.hxx`
 as header files.
-In these files we check for the pattern
+In these files we check for the existence of constructs like
 ```c
 #ifndef SOME_NAME
 #define SOME_NAME
@@ -63,7 +63,7 @@ Paths not matching this regular expression are ignored.
 Three artificial examples:
  * `dir/\(foo\|bar\)\.h` checks `dir/foo.h` and `dir/bar.h` only,
  * `^v[0-9\.]\+/` checks paths beginning with a versional directory only,
- * `/.*/' checks paths with at least two directories only.
+ * `/.*/` checks paths with at least two directories only.
 
 By default, all paths are checked.
 
@@ -86,18 +86,18 @@ A space-separated list of files for which the check failed.
 Create a workflow file, e.g., `.github/workflows/include-guards.yml`,
 with the following content:
 ```yml
-name: test-include-guards
+name: check-include-guards
 
 on: [push, pull_request]
 
 jobs:
-  build:
+  include-guards:
+    name: Check include guards
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Include guards check
+    - name: Check include guards
       uses: sbeyer/include-guards-check-action@v1.0.0
       with:
         path: 'include/'
