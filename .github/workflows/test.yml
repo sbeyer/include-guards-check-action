@@ -61,3 +61,22 @@ jobs:
         with:
           path: 'test/last_dir.good'
           pattern: "PROJECT_{last_dir}_{file}"
+      - name: "Check only option"
+        uses: ./
+        with:
+          path: 'test/last_dir.good'
+          pattern: "PROJECT__{file}"
+          only: '^[^/]*$'
+      - name: "Check ignore option"
+        uses: ./
+        with:
+          path: 'test/last_dir.good'
+          pattern: "PROJECT__{file}"
+          ignore: '/'
+      - name: "Check only and ignore option combined"
+        uses: ./
+        with:
+          path: 'test/last_dir.good'
+          pattern: "PROJECT_{first_dir}_{file}"
+          only: '^dir1/'
+          ignore: 'dir2'
