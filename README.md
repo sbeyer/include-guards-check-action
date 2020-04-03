@@ -103,3 +103,5 @@ jobs:
         path: 'include/'
         pattern: 'PROJECT_{last_dir}_{file_base}'
 ```
+
+You can also [glance at other projects using this GitHub Action](//github.com/search?l=YAML&q=include-guards-check-action&type=Code).
