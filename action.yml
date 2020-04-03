@@ -1,5 +1,9 @@
 name: 'Include Guards Check'
+author: 'Stephan Beyer (sbeyer)'
 description: 'Check for #include guards in C/C++ header files'
+branding:
+  icon: 'hash'
+  color: 'green'
 inputs:
   path:
     description: 'The path to look for include files'
