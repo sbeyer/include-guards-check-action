@@ -70,7 +70,7 @@ fail () {
 	ret=1
 }
 
-for header in $(find . -regex '.\+\.\(h\|H\|hh\|hpp\|hxx\)' |
+for header in $(find . -regex '.\+\.\(h\|H\|hh\|hpp\|hxx\|cuh\)' |
 			sed -e 's/^\.\///' |
 			grep -e "$INPUT_ONLY" |
 			grep -v -e '^.git/' ${INPUT_IGNORE:+-e} ${INPUT_IGNORE:+"$INPUT_IGNORE"})
@@ -85,6 +85,6 @@ do
 		fail "$header" "$guard"
 done
 
-echo "::set-output name=fails::$failed"
+echo "fails=$failed" >> $GITHUB_OUTPUT
 
 exit $ret
