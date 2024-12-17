@@ -96,9 +96,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Check include guards
-      uses: sbeyer/include-guards-check-action@v1.0.0
+      uses: sbeyer/include-guards-check-action@v2.0.0
       with:
         path: 'include/'
         pattern: 'PROJECT_{last_dir}_{file_base}'
