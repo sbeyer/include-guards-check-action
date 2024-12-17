@@ -3,7 +3,7 @@
 This is a [GitHub Action](//help.github.com/en/actions) to check for
 `#include` guards in C/C++ header files.
 
-We consider files with extensions `.h`, `.H`, `.hh`, `.hpp`, and `.hxx`
+We consider files with extensions `.h`, `.H`, `.hh`, `.hpp`, `.cuh` and `.hxx`
 as header files.
 In these files we check for the existence of constructs like
 ```c
